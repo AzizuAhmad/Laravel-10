@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Pots\PotsStoreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tweet\TweetStoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +24,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::post('tweets',TweetStoreController::class)->name('tweets.store');
+// Route::post('tweets', TweetStoreController::class)->name('tweets.store');
+Route::post('tweets',TweetStoreController::class)->name('tweets.store');
+Route::post('posts',PotsStoreController::class)->name('posts.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';
